@@ -46,4 +46,5 @@ public class FuncionarioPontoController {
     public ResponseEntity<List<FuncionarioPonto>> listarTodosPontos() {
         return ResponseEntity.ok(funcionarioPontoService.listarPontos());
     }
+
 }

@@ -4,6 +4,7 @@ import br.com.pontoeletronico.api.model.Funcionario;
 import br.com.pontoeletronico.api.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/funcionarios")
+@CrossOrigin(origins = "http://localhost:5173")
 public class FuncionarioController {
 
     @Autowired
@@ -40,4 +42,15 @@ public class FuncionarioController {
         funcionarioService.deletarFuncionarioPorId(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/cpf")
+    public ResponseEntity<Long> getFuncionarioIdByCpf(@RequestParam String cpf) {
+        System.out.println("Recebendo CPF: " + cpf);
+        Long funcionarioId = funcionarioService.getIdByCpf(cpf);
+        if (funcionarioId != null) {
+            return ResponseEntity.ok(funcionarioId);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 }

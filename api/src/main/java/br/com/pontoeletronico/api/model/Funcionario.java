@@ -21,4 +21,7 @@ public class Funcionario implements Serializable {
 
     private String nome;
     private String cargo;
+
+    @Column(unique = true)
+    private String cpf;
 }

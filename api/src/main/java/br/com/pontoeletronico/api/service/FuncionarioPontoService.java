@@ -19,10 +19,23 @@ public class FuncionarioPontoService {
     public void registrarPonto(Funcionario funcionario) {
         List<FuncionarioPonto> pontos = funcionarioPontoRepository.findByFuncionario(funcionario);
 
-        TipoRegistro tipoRegistro = pontos.isEmpty() ||
-                pontos.get(0).getTipoRegistro() == TipoRegistro.SAIDA
-                ? TipoRegistro.ENTRADA
-                : TipoRegistro.SAIDA;
+        TipoRegistro tipoRegistro;
+
+        if (pontos.isEmpty()) {
+            tipoRegistro = TipoRegistro.ENTRADA;
+            System.out.println("Nenhum registro encontrado. Registrando ENTRADA.");
+        } else {
+            TipoRegistro ultimoRegistro = pontos.get(0).getTipoRegistro();
+            System.out.println("Último registro encontrado: " + ultimoRegistro);
+
+            if (ultimoRegistro == TipoRegistro.SAIDA) {
+                tipoRegistro = TipoRegistro.ENTRADA;
+                System.out.println("Registrando ENTRADA após SAÍDA.");
+            } else {
+                tipoRegistro = TipoRegistro.SAIDA;
+                System.out.println("Registrando SAÍDA após ENTRADA.");
+            }
+        }
 
         FuncionarioPonto novoPonto = new FuncionarioPonto();
         novoPonto.setFuncionario(funcionario);
@@ -30,7 +43,10 @@ public class FuncionarioPontoService {
         novoPonto.setTipoRegistro(tipoRegistro);
 
         funcionarioPontoRepository.save(novoPonto);
+        System.out.println("Novo registro salvo: " + novoPonto);
     }
+
+
 
     public List<FuncionarioPonto> listarPontosPorFuncionario(Funcionario funcionario) {
         return funcionarioPontoRepository.findByFuncionario(funcionario);
@@ -39,4 +55,6 @@ public class FuncionarioPontoService {
     public List<FuncionarioPonto> listarPontos() {
         return funcionarioPontoRepository.findAll();
     }
+
+
 }

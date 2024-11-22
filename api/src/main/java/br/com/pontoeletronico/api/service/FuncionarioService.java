@@ -30,4 +30,8 @@ public class FuncionarioService {
         funcionarioRepository.deleteById(id);
     }
 
+    public Long getIdByCpf(String cpf) {
+        Funcionario funcionario = funcionarioRepository.findByCpf(cpf);
+        return funcionario != null ? funcionario.getId() : null;
+    }
 }
