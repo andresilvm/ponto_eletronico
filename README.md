@@ -1,4 +1,4 @@
-# Work Time
+# ⏱️ Work Time
 
 ## Work Time é uma aplicação para registro de ponto eletrônico, desenvolvida com o objetivo de facilitar o controle de horários de trabalho de funcionários. A aplicação segue a arquitetura MVC (Model-View-Controller) e foi construída com Spring Boot no backend e React no frontend.
 
