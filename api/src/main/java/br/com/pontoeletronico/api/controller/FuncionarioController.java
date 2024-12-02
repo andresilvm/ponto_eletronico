@@ -24,6 +24,13 @@ public class FuncionarioController {
         funcionarioService.cadastrarFuncionario(funcionario);
     }
 
+    @PostMapping("/multiplos")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void cadastrarFuncionariosEmMassa(@RequestBody List<Funcionario> funcionarios) {
+        funcionarioService.cadastrarFuncionariosEmMassa(funcionarios);
+    }
+
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Funcionario> listarTodosFuncionarios() {

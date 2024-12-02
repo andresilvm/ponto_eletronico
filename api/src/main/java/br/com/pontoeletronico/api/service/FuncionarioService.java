@@ -18,6 +18,10 @@ public class FuncionarioService {
         funcionarioRepository.save(funcionario);
     }
 
+    public void cadastrarFuncionariosEmMassa(List<Funcionario> funcionarios) {
+        funcionarioRepository.saveAll(funcionarios);
+    }
+
     public List<Funcionario> listarTodosFuncionarios() {
         return funcionarioRepository.findAll();
     }
